@@ -32,7 +32,7 @@ jobs:
         uses: stats-organization/github-readme-stats-action@b4d2ef3b8051484b318d455163153b23a2b35fa2 # v1.1.0
         with:
           card: top-langs
-          options: theme=github_dark&hide_progress=true
+          options: theme=github_dark&hide_progress=true&hide=lua
           path: top-langs.svg
           token: ${{ secrets.GITHUB_TOKEN }}
 
