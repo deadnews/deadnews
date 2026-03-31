@@ -1,0 +1,44 @@
+name: Main
+
+on:
+  schedule:
+    - cron: 0 0,12 * * *
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  update-stats:
+    name: Update Stats Cards
+    environment: gist
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Generate stats card
+        uses: stats-organization/github-readme-stats-action@b4d2ef3b8051484b318d455163153b23a2b35fa2 # v1.1.0
+        with:
+          card: stats
+          options: theme=github_dark&show_icons=true
+          path: stats.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate top-langs card
+        uses: stats-organization/github-readme-stats-action@b4d2ef3b8051484b318d455163153b23a2b35fa2 # v1.1.0
+        with:
+          card: top-langs
+          options: theme=github_dark&hide_progress=true
+          path: top-langs.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload to gist
+        env:
+          GH_TOKEN: ${{ secrets.GIST_TOKEN }}
+          GIST_ID: ${{ vars.GIST_ID }}
+        run: |
+          gh api --method PATCH "/gists/${GIST_ID}" \
+            -f "files[stats.svg][content]=$(cat stats.svg)" \
+            -f "files[top-langs.svg][content]=$(cat top-langs.svg)"
