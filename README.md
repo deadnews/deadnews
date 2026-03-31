@@ -1,2 +1,2 @@
-![](https://github-readme-stats.vercel.app/api?username=deadnews&theme=github_dark&show_icons=true) 
-![](https://github-readme-stats.vercel.app/api/top-langs/?username=deadnews&theme=github_dark&hide_progress=true&hide=lua)
+![](https://gist.githubusercontent.com/deadnews/b1c6f322e0349606054111faed35e21e/raw/stats.svg)
+![](https://gist.githubusercontent.com/deadnews/b1c6f322e0349606054111faed35e21e/raw/top-langs.svg)
